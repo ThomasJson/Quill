@@ -3,8 +3,18 @@
 
 <PageTitle>Home</PageTitle>
 
-<div class="flex flex-col h-full items-center justify-center">
+<AuthorizeView>
 
-    <h1 class="text-xl">Hello, Guest !</h1>
+    <Authorized>
+        <div class="flex flex-col h-full items-center justify-center">
+            <h1 class="text-xl">Hello There !</h1>
+        </div>
+    </Authorized>
 
-</div>
+    <NotAuthorized>
+        <div class="flex flex-col h-full items-center justify-center">
+            <h1 class="text-xl">Hello, Guest !</h1>
+        </div>
+    </NotAuthorized>
+
+</AuthorizeView>
