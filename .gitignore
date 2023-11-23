@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Hide config files
+Template.WebUI/appsettings.json
+Template.WebUI/appsettings.Development.json
