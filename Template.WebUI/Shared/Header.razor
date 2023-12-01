@@ -24,12 +24,12 @@
 
         <AuthorizeView>
             <Authorized>
-                <a class="text-zinc-500 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block mr-2" href="/account">
+                <a class="text-zinc-500 text-xl font-bold hover:bg-yellow-100 px-2 py-1 rounded block mr-2" href="/account">
                     @context.User.Identity.Name
                 </a>
             </Authorized>
             <NotAuthorized>
-                <button class="text-zinc-500 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block mr-2" @onclick="ShowLoginModal">
+                <button class="text-zinc-500 text-xl font-bold hover:bg-yellow-100 px-2 py-1 rounded block mr-2" @onclick="ShowLoginModal">
                     Sign in
                 </button>
             </NotAuthorized>

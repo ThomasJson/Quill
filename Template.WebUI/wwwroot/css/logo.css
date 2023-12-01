@@ -1,4 +1,18 @@
 ﻿.logo {
+
+    width: 47px;
+    height: 47px;
+}
+
+.logo img {
+
+    width: 47px;
+    height: 47px;
+
+}
+
+.addNoteBtn {
+
     position: absolute;
     top: 3px;
     right: 3px;
@@ -7,7 +21,7 @@
     height: 47px;
 }
 
-.logo img {
+.addNoteBtn img {
 
     width: 47px;
     height: 47px;
