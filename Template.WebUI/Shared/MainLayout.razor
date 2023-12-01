@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
+@using Template.WebUI.Shared;
 @using Template.WebUI.Shared.Themes;
 
 <PageTitle>Template.WebUI</PageTitle>
@@ -8,13 +9,15 @@
 
     <Header />
 
-    <main class="w-full mt-16 bg-slate-50">
+    <main class="w-full mt-16 mb-16 bg-gray-50">
 
         <CascadingValue Value="@ApplicationTheme">
             @Body
         </CascadingValue>
 
     </main>
+
+    <Footer />
 
 </div>
 

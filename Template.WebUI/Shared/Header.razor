@@ -1,6 +1,6 @@
 ﻿@using Template.WebUI.Components;
 
-<header class="flex flex-row justify-between items-center w-full h-16 fixed top-0 left-0 bg-blue-900">
+<header class="flex flex-row justify-between items-center w-full h-16 fixed top-0 left-0 bg-gray-50">
 
     @* Logo + Titre *@
     <div class="flex flex-row w-1/4 gap-2 items-center ml-4">
@@ -9,11 +9,11 @@
             <img src="/img/newLogo.svg" />
         </div>
 
-        <a class="hidden lg:flex h-min text-white font-bold text-2xl" href="">Quill</a>
+        <a class="hidden lg:flex h-min text-zinc-600 font-bold text-2xl" href="">Quill</a>
 
     </div>
 
-    @* Nav Desktop *@
+    @* Desktop *@
     <div class="hidden lg:flex flex-row w-3/4 justify-between items-center">
 
         <nav class="flex flex-row gap-2 items-center p-4">
@@ -24,14 +24,12 @@
 
         <AuthorizeView>
             <Authorized>
-                <div class="mr-4">
-                    <a class="text-white text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block" href="/account">
-                        @context.User.Identity.Name
-                    </a>
-                </div>
+                <a class="text-zinc-600 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block mr-2" href="/account">
+                    @context.User.Identity.Name
+                </a>
             </Authorized>
             <NotAuthorized>
-                <button class="text-white text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block mr-4" @onclick="ShowLoginModal">
+                <button class="text-zinc-600 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block mr-2" @onclick="ShowLoginModal">
                     Sign in
                 </button>
             </NotAuthorized>
@@ -39,21 +37,21 @@
 
     </div>
 
-    @* Login Icons smartphone *@
+    @* Mobile *@
     <div class="flex flex-row lg:hidden">
 
-        <div class="text-white text-xl mr-2">
+        <div class="mr-2">
 
             <AuthorizeView>
 
                 <Authorized>
-                    <a class="text-white text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block" href="/account">
+                    <a class="text-zinc-600 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block" href="/account">
                         <i class="fa-solid fa-user"></i>
                     </a>
                 </Authorized>
 
                 <NotAuthorized>
-                    <button class="text-white text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block" @onclick="ShowLoginModal">
+                    <button class="text-zinc-600 text-xl font-bold hover:bg-blue-700 px-2 py-1 rounded block" @onclick="ShowLoginModal">
                         <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     </button>
                 </NotAuthorized>
