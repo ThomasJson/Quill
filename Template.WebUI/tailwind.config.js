@@ -5,7 +5,12 @@ module.exports = {
     ],
 
     theme: {
-        extend: {},
+        extend: {
+            spacing: {
+                '13%': '13%',
+                '87%': '87%'
+            }
+        },
     },
 
     plugins: [],

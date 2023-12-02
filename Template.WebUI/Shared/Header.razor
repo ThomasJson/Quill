@@ -3,7 +3,7 @@
 <header class="flex flex-row justify-between items-center w-full h-16 fixed top-0 left-0 bg-gray-100">
 
     @* Desktop *@
-    <div class="hidden lg:flex flex-row w-1/4 ml-4">
+    <div class="hidden lg:flex flex-row w-13% ml-4">
 
         <a class="flex flex-row gap-2 items-center" href="/">
 
@@ -16,9 +16,21 @@
 
     </div>
 
-    <div class="hidden lg:flex flex-row w-3/4 justify-between items-center">
+    <div class="hidden lg:flex flex-row w-87% justify-between items-center">
 
-        <nav class="flex flex-row gap-2 items-center p-4">
+        <nav class="flex flex-row gap-4 w-1/5 justify-between items-center">
+
+            <NavLink class="text-zinc-500" href="/">
+                Home
+            </NavLink>
+
+            <NavLink class="text-zinc-500" href="/folders">
+                Folders
+            </NavLink>
+
+            <NavLink class="text-zinc-500" href="/settings">
+                Settings
+            </NavLink>
 
         </nav>
 
@@ -38,7 +50,7 @@
     </div>
 
     @* Mobile *@
-    <nav class="text-zinc-600 flex flex-row w-full justify-between px-8 lg:hidden">
+    <nav class="text-zinc-500 flex flex-row w-full justify-between px-8 lg:hidden">
 
         <NavLink class="text-xl font-bold" href="/">
             <i class="fa-solid fa-house"></i>
@@ -55,13 +67,13 @@
         <AuthorizeView>
 
             <Authorized>
-                <a class="text-zinc-600 text-xl font-bold rounded block" href="/account">
+                <a class="text-zinc-500 text-xl font-bold rounded block" href="/account">
                     <i class="fa-solid fa-user"></i>
                 </a>
             </Authorized>
 
             <NotAuthorized>
-                <button class="text-zinc-600 text-xl font-bold rounded block" @onclick="ShowLoginModal">
+                <button class="text-zinc-500 text-xl font-bold rounded block" @onclick="ShowLoginModal">
                     <i class="fa-solid fa-right-to-bracket"></i>
                 </button>
             </NotAuthorized>
