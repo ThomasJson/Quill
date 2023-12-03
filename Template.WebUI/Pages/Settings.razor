@@ -1,6 +1,30 @@
 ﻿@page "/settings"
 
-<h3>Settings</h3>
+<PageTitle>Settings</PageTitle>
+
+<AuthorizeView>
+
+    <Authorized>
+        <div class="flex flex-row justify-center">
+            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4">
+
+                <h1 class="text-xl italic">Settings</h1>
+
+            </div>
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="flex flex-row justify-center">
+            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4">
+
+                <p class="text-xl">Settings</p>
+
+            </div>
+        </div>
+    </NotAuthorized>
+
+</AuthorizeView>
 
 @code {
 
