@@ -12,6 +12,7 @@ namespace Template.Domain.Entities
         public string Content { get; set; }
 
         public ICollection<NoteCategoryLinkEntity> CategoriesLink { get; set; }
-        public ICollection<ContainerNoteLinkEntity> ContainersLink { get; set; }
+        public ICollection<AccountLinksEntity> AccountsLink { get; set; }
+        public ICollection<FolderNoteLinkEntity> FoldersLink { get; set; }
     }
 }

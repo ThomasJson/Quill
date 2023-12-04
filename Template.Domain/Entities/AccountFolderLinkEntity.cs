@@ -2,7 +2,7 @@
 
 namespace Template.Domain.Entities
 {
-    public class AccountFolderLinkEntity
+    public class AccountLinksEntity
     {
         [ForeignKey(nameof(Account))]
         public int AccountId { get; set; }

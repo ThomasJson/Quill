@@ -20,5 +20,7 @@ namespace Template.Domain.Entities
         public UserEntity User { get; set; }
 
         public ICollection<AccountRoleLinkEntity> RolesLink { get; set; }
+        public ICollection<AccountLinksEntity> FoldersLink { get; set; }
+        public ICollection<AccountLinksEntity> NotesLink { get; set; }
     }
 }

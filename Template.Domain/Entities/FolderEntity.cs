@@ -8,7 +8,7 @@ namespace Template.Domain.Entities
         [Required]
         public string Name { get; set; }
 
-        public ICollection<AccountFolderLinkEntity> AccountsLink { get; set; }
+        public ICollection<AccountLinksEntity> AccountsLink { get; set; }
         public ICollection<FolderNoteLinkEntity> NotesLink { get; set; }
     }
 }
