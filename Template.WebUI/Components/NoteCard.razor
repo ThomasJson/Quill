@@ -1,0 +1,56 @@
+﻿@using MediatR;
+@using Template.Application.Features.Note.Queries;
+@using Template.Application.Interfaces.Services;
+@using Template.Application.Features.Note.Shared.Dto;
+
+@inject NavigationManager navManager
+@inject INoteService noteService
+@inject IMediator Mediator
+
+@* <tr class="hover:bg-gray-50">
+
+    <td class="py-2 px-4 border-b border-gray-300">@Note.Title</td>
+    <td class="py-2 px-4 border-b border-gray-300">@Note.Content</td>
+    <td class="py-2 px-4 border-b border-gray-300">@Note.CreatedDate?.ToString("dd/MM/yyyy")</td>
+    <td class="py-2 px-4 border-b border-gray-300">@Note.UpdatedDate?.ToString("dd/MM/yyyy")</td>
+    <td class="py-2 px-4 border-b border-gray-300">
+        <button class="border border-1 p-2 bg-blue-300" @onclick=@(()=> navManager.NavigateTo($"/updateNote/{Note.Id}"))>Update</button>
+    </td>
+    <td class="py-2 px-4 border-b border-gray-300">
+        <button class="border border-1 p-2 bg-red-300" @onclick="Delete">Delete</button>
+    </td>
+
+</tr> *@
+
+<div class="flex flex-row w-full justify-between border border-1 rounded p-2">
+
+    <div class="flex flex-col">
+        <h3>@Note.Title</h3>
+        <p>@Note.Content</p>
+    </div>
+
+    <div class="flex flex-row">
+        <button class="border border-1 p-2 bg-red-300" @onclick="Delete">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public NoteDto Note { get; set; }
+
+    [Parameter]
+    public EventCallback<NoteDto> IsNoteDeleted { get; set; }
+
+    private async Task Delete()
+    {
+        var deletedNote = await Mediator.Send(new DeleteNoteQuery(Note));
+
+        if (deletedNote != null)
+        {
+            await IsNoteDeleted.InvokeAsync(deletedNote);
+        }
+    }
+}

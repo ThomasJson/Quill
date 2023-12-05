@@ -5,20 +5,22 @@
 
 @inject IMediator Mediator
 
-<EditForm class="flex flex-col w-full p-2 gap-3" Model="@_note" OnValidSubmit="AddNote">
+<EditForm class="flex flex-col w-full p-2 gap-3" Model="@_note" OnValidSubmit="CreateNote">
 
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
     <InputText class="border border-1 p-2 text-gray-800" placeholder="Title" @bind-Value="@_note.Title"></InputText>
     <ValidationMessage class="text-red-500" For="(()=> _note.Title)"></ValidationMessage>
 
-    <InputTextArea class="border border-1 p-2 text-gray-800" placeholder="Content" @bind-Value="@_note.Content"></InputTextArea>
+    <InputTextArea class="border border-1 p-2 text-gray-800 h-full" placeholder="Content" @bind-Value="@_note.Content"></InputTextArea>
     <ValidationMessage class="text-red-500" For="(()=> _note.Content)"></ValidationMessage>
 
     <div class="flex flex-row w-full justify-between">
 
-        <button class="border border-1 p-2 w-2/6 text-gray-800 bg-green-300" type="submit">Create Note</button>
-
+        <button class="border border-1 p-2 w-1/4 text-gray-800 bg-blue-300">Folder</button>
+        <button class="border border-1 p-2 w-1/4 text-gray-800 bg-yellow-300">Category</button>
+        <button class="border border-1 p-2 w-1/4 text-gray-800 bg-green-300" type="submit">Edit</button>
+        
     </div>
 
 </EditForm>
@@ -30,7 +32,7 @@
 
     private NoteDto _note = new();
 
-    private async Task AddNote()
+    private async Task CreateNote()
     {
         var createdNoteDto = await Mediator.Send(new CreateNoteQuery(new NoteDto
         {
