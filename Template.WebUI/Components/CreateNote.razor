@@ -1,0 +1,47 @@
+﻿@using MediatR;
+@using Template.Application.Features.Note.Shared.Dto;
+@using Template.Application.Features.Note.Queries;
+@using Template.Application.Common.Utils;
+
+@inject IMediator Mediator
+
+<EditForm class="flex flex-col w-full p-2 gap-3" Model="@_note" OnValidSubmit="AddNote">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <InputText class="border border-1 p-2 text-gray-800" placeholder="Title" @bind-Value="@_note.Title"></InputText>
+    <ValidationMessage class="text-red-500" For="(()=> _note.Title)"></ValidationMessage>
+
+    <InputTextArea class="border border-1 p-2 text-gray-800" placeholder="Content" @bind-Value="@_note.Content"></InputTextArea>
+    <ValidationMessage class="text-red-500" For="(()=> _note.Content)"></ValidationMessage>
+
+    <div class="flex flex-row w-full justify-between">
+
+        <button class="border border-1 p-2 w-2/6 text-gray-800 bg-green-300" type="submit">Create Note</button>
+
+    </div>
+
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public EventCallback<NoteDto> IsNoteCreated { get; set; }
+
+    private NoteDto _note = new();
+
+    private async Task AddNote()
+    {
+        var createdNoteDto = await Mediator.Send(new CreateNoteQuery(new NoteDto
+        {
+            Title = _note.Title,
+            Content = _note.Content,
+            CreatedDate = DateTimeUtils.ShortToSeconds(DateTime.UtcNow)
+        }));
+
+        if (createdNoteDto != null)
+        {
+            await IsNoteCreated.InvokeAsync(createdNoteDto);
+        }
+    }
+}

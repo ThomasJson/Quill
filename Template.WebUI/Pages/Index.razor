@@ -1,6 +1,15 @@
 ﻿@page "/"
 @page "/index"
 
+@using MediatR;
+@using Template.WebUI.Components;
+@using Template.Application.Features.Note.Queries;
+@using Template.Application.Interfaces.Services;
+@using Template.Application.Features.Note.Shared.Dto;
+
+@inject INoteService noteService
+@inject IMediator Mediator
+
 <PageTitle>Home</PageTitle>
 
 <AuthorizeView>
@@ -13,24 +22,45 @@
             </div>
         </div>
 
-        <div class="flex flex-row justify-center">
-            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4">
+        <div class="flex flex-row h-full w-full">
 
+            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4 lg:w-2/4">
                 <h1 class="text-xl italic">Recent notes</h1>
-
             </div>
+
+            <div class="hidden lg:flex w-2/4 m-4 border border-1">
+                <CreateNote IsNoteCreated="IsNoteCreated" />
+            </div>
+
         </div>
+        
     </Authorized>
 
     <NotAuthorized>
-        <div class="flex flex-row justify-center">
-            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4">
+        <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4">
 
-                <h1 class="text-3xl">Welcome</h1>
-                <p class="text-xl">To enjoy the Quill features, please Sign in or create an account.</p>
+            <h1 class="text-3xl">Welcome</h1>
+            <p class="text-xl">To enjoy the Quill features, please Sign in or create an account.</p>
 
-            </div>
         </div>
     </NotAuthorized>
 
 </AuthorizeView>
+
+@code {
+
+    private List<NoteDto> _notesList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _notesList = await Mediator.Send(new GetAllNotesQuery());
+    }
+
+    private void IsNoteCreated(NoteDto newNoteDto)
+    {
+        if (newNoteDto != null)
+        {
+            _notesList.Add(newNoteDto);
+        }
+    }
+}
