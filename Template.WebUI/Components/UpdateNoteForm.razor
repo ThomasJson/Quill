@@ -5,19 +5,19 @@
 
 @inject IMediator Mediator
 
-<EditForm class="flex flex-col w-full h-full p-2 gap-3" Model="@Note" OnValidSubmit="UpdateNote">
+<EditForm class="flex flex-col w-full h-full p-2 gap-2" Model="@Note" OnValidSubmit="UpdateNote">
 
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
-    <InputText class="border border-1 p-2 text-gray-800" placeholder="@Note.Title" @bind-Value="@Note.Title"></InputText>
+    <InputText class="border border-1 p-2 text-zinc-600" placeholder="@Note.Title" @bind-Value="@Note.Title"></InputText>
     <ValidationMessage class="text-red-500" For="(()=> Note.Title)"></ValidationMessage>
 
-    <InputTextArea class="border border-1 p-2 text-gray-800 h-full" placeholder="@Note.Content" @bind-Value="@Note.Content"></InputTextArea>
+    <InputTextArea class="border border-1 p-2 text-zinc-600 h-full" placeholder="@Note.Content" @bind-Value="@Note.Content"></InputTextArea>
     <ValidationMessage class="text-red-500" For="(()=> Note.Content)"></ValidationMessage>
 
     <div class="flex flex-row w-full justify-between">
 
-        <button class="border border-1 p-2 w-2/6 text-gray-800 bg-blue-300" type="submit">
+        <button class="border border-1 p-2 w-2/6 text-zinc-600 bg-blue-300" type="submit">
             Update
         </button>
 

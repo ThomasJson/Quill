@@ -20,20 +20,31 @@
         @* MOBILE *@
         <div class="h-full lg:hidden">
 
-            <div class="addBtnContainer lg:hidden">
+            @if (_selectedNote == null)
+            {
+                <div class="addBtnContainer lg:hidden">
 
-                <div class="addNoteBtn">
-                    <img src="/img/appBtn.svg" />
+                    <div class="addNoteBtn">
+                        <img src="/img/appBtn.svg" />
+                    </div>
+
                 </div>
-
-            </div>
+            }
 
             <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600">
 
-                @foreach (var note in _notesList)
+                @if (_selectedNote == null)
                 {
-                    <NoteCard Note="@note" IsNoteSelected="IsNoteSelected" />
+                    @foreach (var note in _notesList)
+                    {
+                        <NoteCard Note="@note" IsNoteSelected="IsNoteSelected" />
+                    }
                 }
+                else
+                {
+                    <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
+                }
+
 
             </div>
 
@@ -53,7 +64,7 @@
 
                 </div>
 
-                <div class="w-2/4 m-4 border border-1 rounded-xl">
+                <div class="w-2/4 m-4 border border-1 rounded-xl bg-yellow-100">
 
                     @if (_selectedNote == null)
                     {
@@ -94,6 +105,14 @@
         _notesList = await Mediator.Send(new GetAllNotesQuery());
     }
 
+    #region Mobile
+    private void IsNoteSelectedMobile(NoteDto selectedNoteDto)
+    {
+        navManager.NavigateTo($"/updateNoteMobile/{selectedNoteDto.Id}");
+    }
+    #endregion
+
+    #region Desktop
     private void IsNoteSelected(NoteDto selectedNoteDto)
     {
         _selectedNote = selectedNoteDto;
@@ -123,4 +142,5 @@
             _notesList.Remove(noteDeleted);
         }
     }
+    #endregion
 }
