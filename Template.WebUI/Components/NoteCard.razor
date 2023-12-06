@@ -7,46 +7,27 @@
 @inject INoteService noteService
 @inject IMediator Mediator
 
-@* <tr class="hover:bg-gray-50">
-
-    <td class="py-2 px-4 border-b border-gray-300">@Note.Title</td>
-    <td class="py-2 px-4 border-b border-gray-300">@Note.Content</td>
-    <td class="py-2 px-4 border-b border-gray-300">@Note.CreatedDate?.ToString("dd/MM/yyyy")</td>
-    <td class="py-2 px-4 border-b border-gray-300">@Note.UpdatedDate?.ToString("dd/MM/yyyy")</td>
-    <td class="py-2 px-4 border-b border-gray-300">
-        <button class="border border-1 p-2 bg-blue-300" @onclick=@(()=> navManager.NavigateTo($"/updateNote/{Note.Id}"))>Update</button>
-    </td>
-    <td class="py-2 px-4 border-b border-gray-300">
-        <button class="border border-1 p-2 bg-red-300" @onclick="Delete">Delete</button>
-    </td>
-
-</tr> *@
-
-<div class="flex flex-row w-full justify-between border border-1 rounded-xl p-2 bg-white hover:cursor-pointer">
+<div class="flex flex-row w-full justify-between border border-1 rounded-xl p-2 bg-white hover:cursor-pointer hover:bg-yellow-100" @onclick="SelectNote">
 
     <div class="flex flex-row w-full justify-between">
 
         <div class="flex flex-col">
+
             <h3 class="font-bold">@Note.Title</h3>
             <p class="text-zinc-500 text-sm">@Note.Content</p>
+
         </div>
 
         @if (Note.UpdatedDate == null)
         {
-            <div class="text-xs italic">@Note.CreatedDate?.ToString("dd/MM/yyyy")</div>
+            <div class="text-xs italic">Created : @Note.CreatedDate?.ToString("dd/MM/yyyy")</div>
         }
         else
         {
-            <div class="text-xs italic">@Note.UpdatedDate?.ToString("dd/MM/yyyy")</div>
+            <div class="text-xs italic">Updated : @Note.UpdatedDate?.ToString("dd/MM/yyyy")</div>
         }
 
     </div>
-
-    @* <div class="flex flex-row">
-    <button class="border border-1 p-2 bg-red-300" @onclick="Delete">
-    <i class="fa-solid fa-xmark"></i>
-    </button>
-    </div> *@
 
 </div>
 
@@ -55,15 +36,10 @@
     public NoteDto Note { get; set; }
 
     [Parameter]
-    public EventCallback<NoteDto> IsNoteDeleted { get; set; }
+    public EventCallback<NoteDto> IsNoteSelected { get; set; }
 
-    private async Task Delete()
+    private void SelectNote()
     {
-        var deletedNote = await Mediator.Send(new DeleteNoteQuery(Note));
-
-        if (deletedNote != null)
-        {
-            await IsNoteDeleted.InvokeAsync(deletedNote);
-        }
+        IsNoteSelected.InvokeAsync(Note);
     }
 }

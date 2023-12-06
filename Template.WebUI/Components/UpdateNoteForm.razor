@@ -1,0 +1,63 @@
+﻿@using MediatR;
+@using Template.Application.Features.Note.Shared.Dto;
+@using Template.Application.Features.Note.Queries;
+@using Template.Application.Common.Utils;
+
+@inject IMediator Mediator
+
+<EditForm class="flex flex-col w-full p-2 gap-3" Model="@Note" OnValidSubmit="UpdateNote">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <InputText class="border border-1 p-2 text-gray-800" placeholder="@Note.Title" @bind-Value="@Note.Title"></InputText>
+    <ValidationMessage class="text-red-500" For="(()=> Note.Title)"></ValidationMessage>
+
+    <InputTextArea class="border border-1 p-2 text-gray-800 h-full" placeholder="@Note.Content" @bind-Value="@Note.Content"></InputTextArea>
+    <ValidationMessage class="text-red-500" For="(()=> Note.Content)"></ValidationMessage>
+
+    <div class="flex flex-row w-full justify-between">
+
+        <button class="border border-1 p-2 w-2/6 text-gray-800 bg-blue-300" type="submit">
+            Update
+        </button>
+
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter]
+    public NoteDto Note { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsNoteUpdated { get; set; }
+
+    [Parameter]
+    public EventCallback<NoteDto> IsNoteDeleted { get; set; }
+
+    private async Task UpdateNote()
+    {
+        var updatedNoteDto = await Mediator.Send(new UpdateNoteQuery(new NoteDto
+        {
+            Id = Note.Id,
+            Title = Note.Title,
+            Content = Note.Content,
+            UpdatedDate = DateTimeUtils.ShortToSeconds(DateTime.UtcNow)
+        }));
+
+        if (updatedNoteDto != null)
+        {
+            await IsNoteUpdated.InvokeAsync(true);
+        }
+    }
+
+    private async Task Delete()
+    {
+        var deletedNote = await Mediator.Send(new DeleteNoteQuery(Note));
+
+        if (deletedNote != null)
+        {
+            await IsNoteDeleted.InvokeAsync(deletedNote);
+        }
+    }
+}

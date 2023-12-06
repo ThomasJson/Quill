@@ -8,6 +8,7 @@
 @using Template.Application.Features.Note.Shared.Dto;
 
 @inject INoteService noteService
+@inject NavigationManager navManager
 @inject IMediator Mediator
 
 <PageTitle>Home</PageTitle>
@@ -30,14 +31,21 @@
 
                 @foreach (var note in _notesList)
                 {
-                    <NoteCard Note="@note" IsNoteDeleted="IsNoteDeleted"/>
+                    <NoteCard Note="@note" IsNoteSelected="IsNoteSelected"/>
                 }
 
             </div>
 
             <div class="hidden lg:flex w-2/4 m-4 border border-1 rounded-xl">
 
-                <CreateNoteForm IsNoteCreated="IsNoteCreated" />
+                @if (_selectedNote == null)
+                {
+                    <CreateNoteForm IsNoteCreated="IsNoteCreated" />
+                }
+                else
+                {
+                    <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
+                }
 
             </div>
 
@@ -60,9 +68,16 @@
 
     private List<NoteDto> _notesList = new();
 
+    private NoteDto _selectedNote = null;
+
     protected override async Task OnInitializedAsync()
     {
         _notesList = await Mediator.Send(new GetAllNotesQuery());
+    }
+
+    private void IsNoteSelected(NoteDto selectedNoteDto)
+    {
+        _selectedNote = selectedNoteDto;
     }
 
     private void IsNoteCreated(NoteDto newNoteDto)
@@ -70,6 +85,15 @@
         if (newNoteDto != null)
         {
             _notesList.Add(newNoteDto);
+        }
+    }
+
+    private void IsNoteUpdated(bool result)
+    {
+        if (result)
+        {
+            _selectedNote = null;
+            navManager.NavigateTo("/");
         }
     }
 
