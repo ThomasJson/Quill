@@ -20,11 +20,11 @@
 
         @if (Note.UpdatedDate == null)
         {
-            <div class="text-xs italic">Created : @Note.CreatedDate?.ToString("dd/MM/yyyy")</div>
+            <div class="text-xs italic">@Note.CreatedDate?.ToString("dd/MM/yyyy")</div>
         }
         else
         {
-            <div class="text-xs italic">Updated : @Note.UpdatedDate?.ToString("dd/MM/yyyy")</div>
+            <div class="text-xs italic">@Note.UpdatedDate?.ToString("dd/MM/yyyy")</div>
         }
 
     </div>
