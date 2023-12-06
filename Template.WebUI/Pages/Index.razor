@@ -26,9 +26,8 @@
 
         <div class="flex flex-row h-full w-full">
 
-            <div class="flex flex-col h-full w-full px-8 py-4 gap-3 text-zinc-600 lg:px-4 lg:w-2/4">
+            <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600 lg:px-4 lg:w-2/4">
 
-                <h1 class="text-xl italic">Recent notes</h1>
                 @foreach (var note in _notesList)
                 {
                     <NoteCard Note="@note" IsNoteDeleted="IsNoteDeleted"/>
@@ -36,7 +35,7 @@
 
             </div>
 
-            <div class="hidden lg:flex w-2/4 m-4 border border-1">
+            <div class="hidden lg:flex w-2/4 m-4 border border-1 rounded-xl">
 
                 <CreateNoteForm IsNoteCreated="IsNoteCreated" />
 

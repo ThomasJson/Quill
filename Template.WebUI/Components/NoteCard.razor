@@ -22,18 +22,31 @@
 
 </tr> *@
 
-<div class="flex flex-row w-full justify-between border border-1 rounded p-2">
+<div class="flex flex-row w-full justify-between border border-1 rounded-xl p-2 bg-white hover:cursor-pointer">
 
-    <div class="flex flex-col">
-        <h3>@Note.Title</h3>
-        <p>@Note.Content</p>
+    <div class="flex flex-row w-full justify-between">
+
+        <div class="flex flex-col">
+            <h3 class="font-bold">@Note.Title</h3>
+            <p class="text-zinc-500 text-sm">@Note.Content</p>
+        </div>
+
+        @if (Note.UpdatedDate == null)
+        {
+            <div class="text-xs italic">@Note.CreatedDate?.ToString("dd/MM/yyyy")</div>
+        }
+        else
+        {
+            <div class="text-xs italic">@Note.UpdatedDate?.ToString("dd/MM/yyyy")</div>
+        }
+
     </div>
 
-    <div class="flex flex-row">
-        <button class="border border-1 p-2 bg-red-300" @onclick="Delete">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
+    @* <div class="flex flex-row">
+    <button class="border border-1 p-2 bg-red-300" @onclick="Delete">
+    <i class="fa-solid fa-xmark"></i>
+    </button>
+    </div> *@
 
 </div>
 

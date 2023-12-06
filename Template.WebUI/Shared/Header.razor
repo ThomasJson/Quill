@@ -22,6 +22,14 @@
 
             <AuthorizeView Roles="Admin, User">
                 <Authorized>
+                    <NavLink class="text-zinc-600" href="/">
+                        Categories
+                    </NavLink>
+                </Authorized>
+            </AuthorizeView>
+
+            <AuthorizeView Roles="Admin, User">
+                <Authorized>
                     <NavLink class="text-zinc-600" href="/folders">
                         Folders
                     </NavLink>
