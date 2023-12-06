@@ -20,33 +20,47 @@
         @* MOBILE *@
         <div class="h-full lg:hidden">
 
-            @if (_selectedNote == null)
+            @if (_selectedNote == null && _isQuillBtn == false)
             {
-                <div class="addBtnContainer lg:hidden">
+                <div class="addBtnContainer lg:hidden" @onclick=@(()=> _isQuillBtn = !_isQuillBtn)>
 
                     <div class="addNoteBtn">
                         <img src="/img/appBtn.svg" />
                     </div>
 
                 </div>
-            }
 
-            <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600">
+                <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600">
 
-                @if (_selectedNote == null)
-                {
                     @foreach (var note in _notesList)
                     {
                         <NoteCard Note="@note" IsNoteSelected="IsNoteSelected" />
                     }
-                }
-                else
-                {
-                    <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
-                }
 
+                </div>
+            }
 
-            </div>
+            else if (_selectedNote == null && _isQuillBtn == true)
+            {
+                <div class="h-full p-4">
+
+                    <div class="h-full border border-1 rounded-xl bg-yellow-100">
+                        <CreateNoteForm IsNoteCreated="IsNoteCreated" />
+                    </div>
+
+                </div>
+            }
+
+            else
+            {
+                <div class="h-full p-4">
+
+                    <div class="h-full border border-1 rounded-xl bg-yellow-100">
+                        <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
+                    </div>
+
+                </div>
+            }
 
         </div>
 
@@ -99,20 +113,13 @@
     private List<NoteDto> _notesList = new();
 
     private NoteDto _selectedNote = null;
+    private bool _isQuillBtn = false;
 
     protected override async Task OnInitializedAsync()
     {
         _notesList = await Mediator.Send(new GetAllNotesQuery());
     }
 
-    #region Mobile
-    private void IsNoteSelectedMobile(NoteDto selectedNoteDto)
-    {
-        navManager.NavigateTo($"/updateNoteMobile/{selectedNoteDto.Id}");
-    }
-    #endregion
-
-    #region Desktop
     private void IsNoteSelected(NoteDto selectedNoteDto)
     {
         _selectedNote = selectedNoteDto;
@@ -142,5 +149,5 @@
             _notesList.Remove(noteDeleted);
         }
     }
-    #endregion
+
 }
