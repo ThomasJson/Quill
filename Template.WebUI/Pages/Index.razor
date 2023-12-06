@@ -17,40 +17,59 @@
 
     <Authorized>
 
-        <div class="fixed bottom-10 right-10 bg-yellow-200 rounded-full w-14 h-14 lg:hidden">
+        @* MOBILE *@
+        <div class="h-full lg:hidden">
 
-            <div class="addNoteBtn">
-                <img src="/img/newLogo.svg" />
+            <div class="fixed bottom-10 right-10 bg-yellow-200 rounded-full w-14 h-14 lg:hidden">
+
+                <div class="addNoteBtn">
+                    <img src="/img/newLogo.svg" />
+                </div>
+
             </div>
 
-        </div>
-
-        <div class="flex flex-row h-full w-full">
-
-            <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600 lg:px-4 lg:w-2/4">
+            <div class="flex flex-col h-full w-full px-4 py-4 gap-3 text-zinc-600">
 
                 @foreach (var note in _notesList)
                 {
-                    <NoteCard Note="@note" IsNoteSelected="IsNoteSelected"/>
-                }
-
-            </div>
-
-            <div class="hidden lg:flex w-2/4 m-4 border border-1 rounded-xl">
-
-                @if (_selectedNote == null)
-                {
-                    <CreateNoteForm IsNoteCreated="IsNoteCreated" />
-                }
-                else
-                {
-                    <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
+                    <NoteCard Note="@note" IsNoteSelected="IsNoteSelected" />
                 }
 
             </div>
 
         </div>
-        
+
+        @* DESKTOP *@
+        <div class="hidden lg:flex h-full">
+
+            <div class="flex flex-row h-full w-full">
+
+                <div class="flex flex-col h-full w-2/4 px-4 py-4 gap-3 text-zinc-600">
+
+                    @foreach (var note in _notesList)
+                    {
+                        <NoteCard Note="@note" IsNoteSelected="IsNoteSelected" />
+                    }
+
+                </div>
+
+                <div class="w-2/4 m-4 border border-1 rounded-xl">
+
+                    @if (_selectedNote == null)
+                    {
+                        <CreateNoteForm IsNoteCreated="IsNoteCreated" />
+                    }
+                    else
+                    {
+                        <UpdateNoteForm Note="@_selectedNote" IsNoteUpdated="IsNoteUpdated" IsNoteDeleted="IsNoteDeleted" />
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
     </Authorized>
 
     <NotAuthorized>
