@@ -5,15 +5,9 @@
 
 @inject IMediator Mediator
 
-<EditForm class="flex flex-col w-full h-full p-2 gap-2" Model="@_note" OnValidSubmit="CreateNote">
+<EditForm class="flex flex-col w-full h-full" Model="@_note" OnValidSubmit="CreateNote">
 
-    <DataAnnotationsValidator></DataAnnotationsValidator>
-
-    <InputText class="border border-1 p-2 text-gray-800" placeholder="Title" @bind-Value="@_note.Title"></InputText>
-    <ValidationMessage class="text-red-500" For="(()=> _note.Title)"></ValidationMessage>
-
-    <InputTextArea class="border border-1 p-2 text-gray-800 h-full" placeholder="Content" @bind-Value="@_note.Content"></InputTextArea>
-    <ValidationMessage class="text-red-500" For="(()=> _note.Content)"></ValidationMessage>
+    <InputTextArea @bind-Value="@_noteText" @oninput="HandleInput" class="w-full h-full p-4"></InputTextArea>
 
     <div class="flex flex-row w-full justify-between">
 
@@ -27,8 +21,25 @@
 
     [Parameter]
     public EventCallback<NoteDto> IsNoteCreated { get; set; }
-
+    private string _noteText;
     private NoteDto _note = new();
+
+    private void HandleInput(ChangeEventArgs e)
+    {
+        _noteText = e.Value.ToString();
+        var splitIndex = _noteText.IndexOf("\n");
+
+        if (splitIndex > -1)
+        {
+            _note.Title = _noteText.Substring(0, splitIndex);
+            _note.Content = _noteText.Substring(splitIndex + 1);
+        }
+        else
+        {
+            _note.Title = _noteText;
+            _note.Content = string.Empty;
+        }
+    }
 
     private async Task CreateNote()
     {
@@ -42,7 +53,7 @@
         if (createdNoteDto != null)
         {
             await IsNoteCreated.InvokeAsync(createdNoteDto);
-            _note = new();
+            _noteText = string.Empty;
         }
     }
 }
