@@ -5,22 +5,39 @@
 
 @inject IMediator Mediator
 
-<EditForm class="flex flex-col w-full h-full p-2 gap-2" Model="@Note" OnValidSubmit="UpdateNote">
+<EditForm class="flex flex-col w-full h-full" Model="@Note" OnValidSubmit="UpdateNote">
 
-    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <InputTextArea @bind-Value="@_noteText" @oninput="HandleInput" placeholder="@_noteText" class="w-full h-full p-4 text-zinc-600" spellcheck="false"></InputTextArea>
 
-    <InputText class="border border-1 p-2 text-zinc-600" placeholder="@Note.Title" @bind-Value="@Note.Title"></InputText>
-    <ValidationMessage class="text-red-500" For="(()=> Note.Title)"></ValidationMessage>
+    <div class="flex flex-row w-full h-16 justify-around bg-white">
 
-    <InputTextArea class="border border-1 p-2 text-zinc-600 h-full" placeholder="@Note.Content" @bind-Value="@Note.Content"></InputTextArea>
-    <ValidationMessage class="text-red-500" For="(()=> Note.Content)"></ValidationMessage>
-
-    <div class="flex flex-row w-full justify-between">
-
-        <button class="border border-1 p-2 w-2/6 text-zinc-600 bg-blue-300" type="submit">
-            Update
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-regular fa-image"></i>
         </button>
 
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-solid fa-list"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-solid fa-shirt"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-regular fa-square-check"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-solid fa-t"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-regular fa-folder"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-xl" type="submit">
+            <i class="fa-solid fa-check"></i>
+        </button>
     </div>
 
 </EditForm>
@@ -34,6 +51,30 @@
 
     [Parameter]
     public EventCallback<NoteDto> IsNoteDeleted { get; set; }
+
+    private string _noteText;
+
+    protected override void OnParametersSet()
+    {
+        _noteText = $"{Note.Title}\n{Note.Content}";
+    }
+
+    private void HandleInput(ChangeEventArgs e)
+    {
+        _noteText = e.Value.ToString();
+        var splitIndex = _noteText.IndexOf("\n");
+
+        if (splitIndex > -1)
+        {
+            Note.Title = _noteText.Substring(0, splitIndex);
+            Note.Content = _noteText.Substring(splitIndex + 1);
+        }
+        else
+        {
+            Note.Title = _noteText;
+            Note.Content = string.Empty;
+        }
+    }
 
     private async Task UpdateNote()
     {

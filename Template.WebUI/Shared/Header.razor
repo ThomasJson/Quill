@@ -56,24 +56,24 @@
     @* Mobile *@
     <nav class="text-zinc-600 flex flex-row w-full justify-between px-6 lg:hidden">
 
-        <NavLink class="text-xl font-bold" href="/">
+        <NavLink class="text-xl font-bold" ActiveClass="text-blue-500" href="/" Match="NavLinkMatch.All">
             <i class="fa-solid fa-house"></i>
         </NavLink>
 
-        <NavLink class="text-xl font-bold" href="/categories">
+        <NavLink class="text-xl font-bold" ActiveClass="text-blue-500" href="/categories">
             <i class="fa-solid fa-list"></i>
         </NavLink>
 
-        <NavLink class="text-xl font-bold" href="/folders">
+        <NavLink class="text-xl font-bold" ActiveClass="text-blue-500" href="/folders">
             <i class="fa-solid fa-folder"></i>
         </NavLink>
 
         <AuthorizeView>
 
             <Authorized>
-                <a class="text-zinc-600 text-xl font-bold rounded block" href="/account">
+                <NavLink class="text-zinc-600 text-xl font-bold rounded block" ActiveClass="text-blue-500" href="/account">
                     <i class="fa-solid fa-user"></i>
-                </a>
+                </NavLink>
             </Authorized>
 
             <NotAuthorized>
