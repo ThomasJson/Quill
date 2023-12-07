@@ -16,13 +16,9 @@
 
         <nav class="flex flex-row gap-4 justify-between items-center">
 
-            <NavLink class="text-zinc-600" href="/">
-                Home
-            </NavLink>
-
             <AuthorizeView Roles="Admin, User">
                 <Authorized>
-                    <NavLink class="text-zinc-600" href="/">
+                    <NavLink class="text-zinc-600" href="/categories">
                         Categories
                     </NavLink>
                 </Authorized>
@@ -36,15 +32,6 @@
                 </Authorized>
             </AuthorizeView>
             
-            <AuthorizeView Roles="Admin, User">
-                <Authorized>
-                    <NavLink class="text-zinc-600" href="/settings">
-                        Settings
-                    </NavLink>
-                </Authorized>
-            </AuthorizeView>
-            
-
         </nav>
 
     </div>
@@ -67,18 +54,18 @@
     </div>
 
     @* Mobile *@
-    <nav class="text-zinc-600 flex flex-row w-full justify-between px-8 lg:hidden">
+    <nav class="text-zinc-600 flex flex-row w-full justify-between px-6 lg:hidden">
 
         <NavLink class="text-xl font-bold" href="/">
             <i class="fa-solid fa-house"></i>
         </NavLink>
 
-        <NavLink class="text-xl font-bold" href="/folders">
-            <i class="fa-solid fa-folder"></i>
+        <NavLink class="text-xl font-bold" href="/categories">
+            <i class="fa-solid fa-list"></i>
         </NavLink>
 
-        <NavLink class="text-xl font-bold" href="/settings">
-            <i class="fa-solid fa-gear"></i>
+        <NavLink class="text-xl font-bold" href="/folders">
+            <i class="fa-solid fa-folder"></i>
         </NavLink>
 
         <AuthorizeView>

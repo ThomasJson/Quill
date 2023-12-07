@@ -7,11 +7,37 @@
 
 <EditForm class="flex flex-col w-full h-full" Model="@_note" OnValidSubmit="CreateNote">
 
-    <InputTextArea @bind-Value="@_noteText" @oninput="HandleInput" class="w-full h-full p-4"></InputTextArea>
+    <InputTextArea @bind-Value="@_noteText" @oninput="HandleInput" placeholder="Title" class="w-full h-full p-4"></InputTextArea>
 
-    <div class="flex flex-row w-full justify-between">
+    <div class="flex flex-row w-full h-16 justify-around bg-white">
 
-        <button class="border border-1 p-2 w-1/4 text-gray-800 bg-green-300" type="submit">Edit</button>
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-regular fa-image"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-solid fa-list"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-solid fa-shirt"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-xl">
+            <i class="fa-regular fa-square-check"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-solid fa-t"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-lg">
+            <i class="fa-regular fa-folder"></i>
+        </button>
+
+        <button class="p-2 text-zinc-600 text-xl" type="submit">
+            <i class="fa-solid fa-check"></i>
+        </button>
         
     </div>
 

@@ -20,8 +20,8 @@
                 let newLeftWidth = ((startWidthLeft + dx) * 100) / splitterRef.parentNode.offsetWidth;
                 let newRightWidth = ((startWidthRight - dx) * 100) / splitterRef.parentNode.offsetWidth;
                 
-                newLeftWidth = Math.max(25, Math.min(newLeftWidth, 75));
-                newRightWidth = Math.max(25, Math.min(newRightWidth, 75));
+                newLeftWidth = Math.max(35, Math.min(newLeftWidth, 65));
+                newRightWidth = Math.max(35, Math.min(newRightWidth, 65));
                 
                 newRightWidth = 100 - newLeftWidth;
 
