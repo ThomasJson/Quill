@@ -25,12 +25,14 @@
 }
 
 .addNoteBtn {
+
     position: absolute;
     top: 8px;
     right: 7px;
 
     width: 47px;
     height: 47px;
+
 }
 
 .addNoteBtn img {
