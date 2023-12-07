@@ -1,0 +1,8 @@
+﻿.splitter {
+
+    background-color: #aaa;
+    width: 1px;
+    cursor: col-resize;
+    height: auto;
+
+}

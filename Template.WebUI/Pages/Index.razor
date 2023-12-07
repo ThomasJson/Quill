@@ -7,9 +7,9 @@
 @using Template.Application.Interfaces.Services;
 @using Template.Application.Features.Note.Shared.Dto;
 
+@inject IMediator Mediator
 @inject INoteService noteService
 @inject NavigationManager navManager
-@inject IMediator Mediator
 
 <PageTitle>Home</PageTitle>
 
@@ -77,6 +77,8 @@
                     }
 
                 </div>
+
+                <Splitter />
 
                 <div class="w-2/4 m-4 border border-1 rounded-xl bg-yellow-100">
 
