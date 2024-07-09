@@ -81,7 +81,6 @@
 
         if (account == null || account.Password != _currentAccount.Password)
         {
-            await jsRuntime.InvokeVoidAsync("alert", "Invalid User Name or Password");
             return;
         }
 
